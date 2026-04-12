@@ -24,21 +24,21 @@ const initialState = {
                 {
                     id: 3,
                     name: "Peace Lily",
-                    image: "https://cdn.pixabay.com/photo/2016/11/29/03/53/peace-lily-1868728_1280.jpg",
+                    image: "https://cdn.pixabay.com/photo/2019/06/12/14/14/peace-lilies-4269365_1280.jpg",
                     description: "Removes mold spores and improves indoor air quality.",
                     cost: 20
                 },
                 {
                     id: 4,
                     name: "Boston Fern",
-                    image: "https://cdn.pixabay.com/photo/2016/11/29/03/53/boston-fern-1868727_1280.jpg",
+                    image: "https://cdn.pixabay.com/photo/2020/04/30/19/52/boston-fern-5114414_1280.jpg",
                     description: "Increases humidity and removes pollutants.",
                     cost: 18
                 },
                 {
                     id: 5,
                     name: "Aloe Vera",
-                    image: "https://cdn.pixabay.com/photo/2016/11/29/03/53/aloe-vera-1868726_1280.jpg",
+                    image: "https://cdn.pixabay.com/photo/2018/04/02/07/42/leaf-3283175_1280.jpg",
                     description: "Purifies the air and has medicinal properties.",
                     cost: 10
                 }
