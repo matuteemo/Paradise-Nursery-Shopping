@@ -1,19 +1,28 @@
 import React from "react";
+import { useState } from "react";
 import "./shopping_page.css";
 import CartButton from "./cart_button";
-import { addToCart } from "./plantSlice";
+import { addToCart, increaseQuantity, decreaseQuantity } from "./plantSlice";
 import { useSelector, useDispatch } from "react-redux";
 import "./plantstyles.css";
+import "./cart.css"
+
 const ShoppingPage = () => {
     const inventory = useSelector((state) => state.plants.inventory);
     const dispatch = useDispatch();
+    const cart = useSelector((state) => state.plants.cart);
+    const [showCart, setShowCart] = useState(false);
+    const cartTotal = cart.reduce((total, item) => total + item.cost * item.quantity, 0);
+    const toggleCart = () => {setShowCart(!showCart);};
+    const closeCart = () => {setShowCart(false);};
+    const handleContinueShopping = () => {setShowCart(false);};
 
     return (
         <>
             <div className="shopping-container">
                 <nav className="shopping-nav">
                     <h1>Shopping Page</h1>
-                    <CartButton />
+                    <CartButton onClick={toggleCart} />
                 </nav>
                 <div className="shopping-content">
                     {inventory && inventory.length > 0 ? (
@@ -47,6 +56,51 @@ const ShoppingPage = () => {
                         <p>No plants available.</p>
                     )}
                 </div>
+
+                {showCart && (
+                    <div className="modal-overlay" onClick={closeCart}>
+                        <div
+                            className="modal-content"
+                            role="dialog"
+                            aria-modal="true"
+                            aria-label="Shopping cart"
+                            onClick={(event) => event.stopPropagation()}
+                        >
+                            <div className="cart-modal-header">
+                                <h2>Your Cart</h2>
+                                <button className="cart-close-btn" type="button" onClick={closeCart}>
+                                    X
+                                </button>
+                            </div>
+
+                            {cart.length === 0 ? (
+                                <p>Your cart is empty.</p>
+                            ) : (
+                                <>
+                                    {cart.map((item) => (
+                                        <div key={item.id} className="cart-item">
+                                            <h3>{item.name}</h3>
+                                            <p>Quantity: {item.quantity}</p>
+                                            <button onClick={() => dispatch(decreaseQuantity(item))}>-</button>
+                                            <button onClick={() => dispatch(increaseQuantity(item))}>+</button>
+                                            <p>Total: ${(item.cost * item.quantity).toFixed(2)}</p>
+                                        </div>
+                                    ))}
+
+                                    <div className="cart-summary">
+                                        <div className="total-row">
+                                            <span>Total</span>
+                                            <strong>${cartTotal.toFixed(2)}</strong>
+                                        </div>
+                                        <button type="button" className="continue-btn" onClick={handleContinueShopping}>
+                                            Continue shopping
+                                        </button>
+                                    </div>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                )}
             </div>
         </>
     );
