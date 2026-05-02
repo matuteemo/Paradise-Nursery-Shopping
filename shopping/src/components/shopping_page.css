@@ -21,3 +21,13 @@
 	font-size: 1.5rem;
 	color: #1f2937;
 }
+
+.continue-btn{
+	background-color: #4caf50;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}

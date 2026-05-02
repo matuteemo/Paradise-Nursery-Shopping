@@ -255,11 +255,7 @@ const plantSlice = createSlice({
             const plant = action.payload;
             const existingItem = state.cart.find(item => item.id === plant.id); // Check if the plant is in the cart.
             if (existingItem) {
-                if (existingItem.quantity > 1) {
-                    existingItem.quantity -= 1; // If the quantity is greater than 1, decrease it by 1.
-                } else {
-                    state.cart = state.cart.filter(item => item.id !== plant.id); // If the quantity is 1, remove the plant from the cart.
-                }
+                state.cart = state.cart.filter(item => item.id !== plant.id); // If the plant is in the cart, remove it by filtering it out of the cart array.
             }
         },
         clearCart: (state) => {

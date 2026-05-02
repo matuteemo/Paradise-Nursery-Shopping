@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import "./shopping_page.css";
 import CartButton from "./cart_button";
-import { addToCart, increaseQuantity, decreaseQuantity } from "./plantSlice";
+import { addToCart, increaseQuantity, decreaseQuantity, removeFromCart } from "./plantSlice";
 import { useSelector, useDispatch } from "react-redux";
 import "./plantstyles.css";
 import "./cart.css"
@@ -84,6 +84,9 @@ const ShoppingPage = () => {
                                             <button onClick={() => dispatch(decreaseQuantity(item))}>-</button>
                                             <button onClick={() => dispatch(increaseQuantity(item))}>+</button>
                                             <p>Total: ${(item.cost * item.quantity).toFixed(2)}</p>
+                                            <button onClick={() => dispatch(removeFromCart(item))}>
+                                                Remove
+                                            </button>
                                         </div>
                                     ))}
 
